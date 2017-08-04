@@ -1,0 +1,156 @@
+.navigation-drawer
+  max-width: 100%
+  overflow-y: auto
+  overflow-x: hidden
+  -webkit-overflow-scrolling: touch
+  padding: 0 0 100px
+  pointer-events: auto
+  position: fixed
+  transition: .3s $transition.swing
+  width: $navigation-drawer-width
+  top: 0
+  left: 0
+  will-change: transform
+  z-index: 3
+
+  // Remove animation when booting up
+  &:not(.navigation-drawer--is-booted)
+    transition: none !important
+    z-index: -1
+
+    + .toolbar, ~ main, ~ .footer
+      transition: none !important
+
+      @media $display-breakpoints.sm-and-down
+        padding-left: 0 !important
+
+  &--close:not(.navigation--permanent)
+    &.navigation-drawer:not(.navigation-drawer--right)
+      transform: "translate3d(-%s, 0, 0)" % ($navigation-drawer-width)
+
+    &.navigation-drawer--right
+      transform: "translate3d(%s, 0, 0)" % ($navigation-drawer-width)
+
+  &--right
+    left: auto
+    right: 0
+
+  &--absolute
+    position: absolute
+
+  &--permanent, &--persistent
+    &.navigation-drawer--clipped,
+    &.navigation-drawer--floating
+      margin-top: $toolbar-height
+      max-height: "calc(100vh - %s)" % $toolbar-height
+
+      ~ .toolbar, ~ .footer.footer--fixed, ~ .footer.footer--absolute
+        padding-left: 0
+        z-index: 3
+
+    @media all and (max-width: $grid-breakpoints.lg) and (orientation : landscape)
+      &.navigation-drawer--clipped,
+      &.navigation-drawer--floating
+        margin-top: $toolbar-mobile-landscape-height
+        max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
+
+  &--persistent:not(.navigation-drawer--is-mobile),
+  &--permanent
+    &.navigation-drawer--open:not(.navigation-drawer--right)
+      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
+        ~ .toolbar
+          padding-left: $navigation-drawer-width
+
+      ~ main,
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-left: $navigation-drawer-width
+
+    &.navigation-drawer--open.navigation-drawer--right
+      &:not(.navigation-drawer--clipped):not(.navigation-drawer--floating)
+        + .toolbar
+          padding-right: $navigation-drawer-width
+
+      ~ main,
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-right: $navigation-drawer-width
+
+  &--floating:after
+    display: none
+
+  &--mini-variant
+    margin-top: $toolbar-height
+    max-height: "calc(100vh - %s)" % $toolbar-height
+    overflow: hidden
+    width: $navigation-drawer-mini-variant-width
+
+    @media all and (max-width: $grid-breakpoints.lg) and (orientation : landscape)
+      margin-top: $toolbar-mobile-landscape-height
+      max-height: "calc(100vh - %s)" % $toolbar-mobile-landscape-height
+
+    .list__tile__action,
+    .list__tile__avatar
+      justify-content: center
+      min-width: 48px
+
+    .list__tile__content,
+    .list__tile:after
+      opacity: 0
+
+    .subheader,
+    .divider,
+    .list--group
+      display: none !important
+
+    ~ .toolbar
+      padding-left: 0 !important
+
+    &:not(.navigation-drawer--close)
+      ~ main
+        padding-left: $navigation-drawer-mini-variant-width !important
+
+      ~ .footer:not(.footer--fixed):not(.footer--absolute)
+        padding-left: $navigation-drawer-mini-variant-width !important
+
+  &--temporary, &--is-mobile:not(.navigation-drawer--permanent)
+    z-index: 5
+
+    &:not(.navigation-drawer--close)
+      elevation(16)
+
+  ~ toolbar
+    + main
+      min-height: "calc(100vh - %s)" % $toolbar-height
+
+  > .list
+    .list__tile
+      transition: none
+      font-weight: $navigation-drawer-item-font-weight
+
+      &--active
+        .list__tile__title
+          color: inherit
+
+        > *:first-child
+          .icon
+            color: $navigation-drawer-item-active-color
+
+    .list--group
+      .list__tile
+        font-weight: $navigation-drawer-group-item-font-weight
+
+      &__header--active
+        &:after
+          background: transparent
+
+        .list__tile__action:first-of-type
+          .icon
+            color: $navigation-drawer-item-active-color
+
+    .list--group__container
+      .list__tile--active
+        .list__tile__title
+          color: $navigation-drawer-item-active-color
+
+  > .list:not(.list--dense)
+    .list__tile
+      font-size: $navigation-drawer-item-font-size

@@ -1,0 +1,20 @@
+code
+  background: $grey.base
+  color: #bd4147
+  display: inline-block
+  background-color: $grey.lighten-4
+  border-radius: 3px
+  white-space: pre-wrap
+  font-size: 85%
+  font-weight: 100 !important
+  font-weight: 900 !important
+  
+  &:after,
+  &:before
+    content: "\00a0"
+    letter-spacing: -1px
+    
+kbd
+  @extend code
+  background: $grey.darken-3
+  color: #fff
