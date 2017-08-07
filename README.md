@@ -22,10 +22,10 @@ At -> src/components/Face.vue     [AWS console](https://console.aws.amazon.com)
 yarn install
 
 # serve with hot reload at localhost:8080
-yarn run dev
+yarn dev
 
 # build for production with minification
-yarn run build
+yarn build
 
 
 ```
