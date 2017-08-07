@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Face from '@/components/Face'
+const Face = () => import('@/components/Face')
+
 
 Vue.use(Router)
 
