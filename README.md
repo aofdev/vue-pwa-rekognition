@@ -1,6 +1,6 @@
 # The-feeling 2
 
-> vue + Vuetify + Amazon Rekognition with Progressive Web App
+> Vue2 + Vuetify + Amazon Rekognition + Amazon S3 with Progressive Web App
 
 ![alt tag](http://i.imgur.com/0uVqzSQ.png)
 
